@@ -103,3 +103,45 @@ npm run dev
 
 Frontend runs at:
 http://localhost:5173
+
+
+## Postman / API Testing
+
+A Postman collection is included in the repo (`MERN-Auth-Dashboard.postman_collection.json`) containing all backend endpoints:
+
+- **Auth**
+  - POST `/api/auth/register` – Register a new user
+  - POST `/api/auth/login` – Login and receive JWT
+  - POST `/api/auth/logout` – Logout
+
+- **Tasks (Protected)**
+  - GET `/api/tasks` – List all tasks for logged-in user
+  - POST `/api/tasks` – Create a new task
+  - PUT `/api/tasks/:id` – Update a task
+  - DELETE `/api/tasks/:id` – Delete a task
+
+> To test protected endpoints, include the JWT token in the `Authorization` header:  
+> `Authorization: Bearer <your_token_here>`
+
+You can run the backend locally (`npm run dev` in `backend`) and use this collection to verify all endpoints.
+
+---
+
+## Scaling Frontend-Backend for Production
+
+Even without deployment, this is the recommended production setup:
+
+1. **Environment Variables:** Use `.env` for sensitive data (DB URI, JWT_SECRET).  
+2. **Frontend Deployment:** Host React app on **Vercel/Netlify**.  
+3. **Backend Deployment:** Host Node.js API on **Render/Heroku** or any cloud server with HTTPS.  
+4. **Security:**  
+   - Use HTTPS for API calls  
+   - Implement refresh tokens and session expiration  
+   - Centralized error handling and input validation  
+5. **Code Architecture:**  
+   - Keep backend modular: separate routes, controllers, models, middleware  
+   - Frontend: use context for auth, protected routes, and component-level state management  
+6. **Scalability Potential:**  
+   - Backend: Add roles, pagination, caching, or microservices  
+   - Frontend: Lazy load components, optimize bundle size, and handle token refresh seamlessly
+
