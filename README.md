@@ -92,16 +92,10 @@ npm install
 cp .env.example .env   # add MongoDB URI and JWT_SECRET
 npm run dev
 
-Backend runs at:
-http://localhost:5000
-
 3. Frontend Setup
 cd ../frontend
 npm install
 npm run dev
-
-Frontend runs at:
-http://localhost:5173
 
 
 ## Postman / API Testing
