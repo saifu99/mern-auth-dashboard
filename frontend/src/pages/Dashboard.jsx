@@ -126,7 +126,7 @@ export default function Dashboard() {
       <header className="bg-white shadow-sm px-6 py-4 flex justify-between items-center">
         <h1 className="text-xl font-semibold">Dashboard</h1>
         <div className="flex items-center gap-4">
-          <span className="text-sm text-gray-600">{user?.email}</span>
+          <span className="text-sm text-gray-600">{user?.name}</span>
           <button
             onClick={handleLogout}
             className="bg-red-500 text-white px-3 py-1.5 rounded hover:bg-red-600 text-sm"
