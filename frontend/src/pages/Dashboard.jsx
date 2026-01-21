@@ -13,12 +13,12 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-  // Redirect if not authenticated
+  //Redirect if not authenticated
   useEffect(() => {
     if (!token) navigate("/login");
   }, [token, navigate]);
 
-  // Fetch profile + tasks
+  //Fetch profile+tasks
   useEffect(() => {
     const fetchData = async () => {
       try {
