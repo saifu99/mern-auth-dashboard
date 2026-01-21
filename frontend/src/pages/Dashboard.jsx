@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "../config/api";
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
@@ -22,11 +23,11 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userRes = await fetch("http://localhost:5000/api/users/me", {
+        const userRes = await fetch(`${API_BASE_URL}/api/users/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        const taskRes = await fetch("http://localhost:5000/api/tasks", {
+        const taskRes = await fetch(`${API_BASE_URL}/api/tasks`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -62,7 +63,7 @@ export default function Dashboard() {
     if (!title.trim()) return;
 
     try {
-      const res = await fetch("http://localhost:5000/api/tasks", {
+      const res = await fetch(`${API_BASE_URL}/api/tasks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -87,7 +88,7 @@ export default function Dashboard() {
   };
 
   const toggleComplete = async (id, completed) => {
-    await fetch(`http://localhost:5000/api/tasks/${id}`, {
+    await fetch(`${API_BASE_URL}/api/tasks/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -104,7 +105,7 @@ export default function Dashboard() {
   };
 
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/api/tasks/${id}`, {
+    await fetch(`${API_BASE_URL}/api/tasks/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });
