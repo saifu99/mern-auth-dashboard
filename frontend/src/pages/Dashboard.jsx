@@ -29,8 +29,19 @@ export default function Dashboard() {
     if (!token) navigate("/login");
   }, [token, navigate]);
 
+  useEffect(() => {
+    if (fromLogin) {
+      window.history.replaceState({}, document.title);
+    }
+  }, [fromLogin]);
+
   // Fetch profile + tasks
   useEffect(() => {
+    let timeoutId = setTimeout(() => {
+      setLoading(false);
+      setError("Server is taking too long. Please refresh.");
+    }, 8000); // 8 seconds hard stop
+
     const fetchData = async () => {
       try {
         const userRes = await API.get("/api/users/me", {
@@ -45,7 +56,9 @@ export default function Dashboard() {
         setTasks(taskRes.data);
       } catch (err) {
         console.error(err);
+        setError("Failed to load dashboard data");
       } finally {
+        clearTimeout(timeoutId);
         setLoading(false);
       }
     };
@@ -114,7 +127,7 @@ export default function Dashboard() {
     }
   };
 
-  if (loading || fromLogin) {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center text-gray-600">
         Loading dashboard...
